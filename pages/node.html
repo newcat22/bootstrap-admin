@@ -78,6 +78,9 @@
 <script>
 
   $(function () {
+
+
+
     //展开折叠
     let t = false;
     $('.expandAll').on('click', function () {
@@ -87,6 +90,27 @@
       } else {
         $('#table').treegrid('expandAll');
       }
+    })
+
+
+    // 添加节点
+    $('.add-btn').on('click', function () {
+
+      window.addNodeModal = $.modal({
+        url: 'node-add.html',
+        title: '添加节点',
+        //禁用掉底部的按钮区域
+        buttons: [],
+        modalDialogClass: 'modal-dialog-centered modal-lg',
+        onHidden: function (obj, data) {
+          if (data === true) {
+            //刷新当前数据表格
+            $('#table').bootstrapTable('refresh');
+            $('#table').bootstrapTable('selectPage', 1)//跳转到第一页
+          }
+        }
+      })
+
     })
 
 

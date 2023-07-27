@@ -22,7 +22,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="me-1">
               <h6 class="mb-2 bsa-ellipsis-1 ">今日收入</h6>
-              <h4 class="mb-1 bsa-ellipsis-1" data-bsa-toggle="numspin" data-decimal-places="2">13145.20</h4>
+              <h4 class="mb-1 bsa-ellipsis-1" id="money">13145.20</h4>
             </div>
             <i class="bi bi-currency-yen fs-1 text-danger"></i>
           </div>
@@ -35,7 +35,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="me-1">
               <h6 class="mb-2 bsa-ellipsis-1">用户总数</h6>
-              <h4 class="mb-1 bsa-ellipsis-1" data-bsa-toggle="numspin">1546</h4>
+              <h4 class="mb-1 bsa-ellipsis-1" id="user">1546</h4>
             </div>
             <i class="bi bi-people fs-1 text-info"></i>
           </div>
@@ -48,7 +48,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="me-1">
               <h6 class="mb-2 bsa-ellipsis-1">订单总数</h6>
-              <h4 class="mb-1 bsa-ellipsis-1" data-bsa-toggle="numspin">2000</h4>
+              <h4 class="mb-1 bsa-ellipsis-1" id="order">2000</h4>
             </div>
             <i class="bi bi-cart fs-1 text-primary"></i>
           </div>
@@ -61,7 +61,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="me-1">
               <h6 class="mb-2 bsa-ellipsis-1">留言</h6>
-              <h4 class="mb-1 bsa-ellipsis-1" data-bsa-toggle="numspin">1000</h4>
+              <h4 class="mb-1 bsa-ellipsis-1" id="message">1000</h4>
             </div>
             <i class="bi bi-chat fs-1 text-success"></i>
           </div>
@@ -317,6 +317,33 @@
 
 
   $(document).ready(function () {
+
+    //数字老虎机效果
+    new countUp.CountUp(document.querySelector('#money'), 1314520, {
+      //小数点后面的位数
+      decimalPlaces: 2,
+      //持续时间
+      duration: 2
+    }).start();
+    new countUp.CountUp(document.querySelector('#user'), 1546, {
+      //小数点后面的位数
+      decimalPlaces: 0,
+      //持续时间
+      duration: 2
+    }).start();
+    new countUp.CountUp(document.querySelector('#order'), 2000, {
+      //小数点后面的位数
+      decimalPlaces: 0,
+      //持续时间
+      duration: 2
+    }).start();
+    new countUp.CountUp(document.querySelector('#message'), 1000, {
+      //小数点后面的位数
+      decimalPlaces: 0,
+      //持续时间
+      duration: 2
+    }).start();
+
 
     new Chart(document.getElementById('chart-bar').getContext('2d'), {
       type: 'bar',
