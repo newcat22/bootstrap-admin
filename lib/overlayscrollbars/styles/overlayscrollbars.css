@@ -1,6 +1,6 @@
 /*! 
  * OverlayScrollbars
- * Version: 2.2.0
+ * Version: 2.2.1
  * 
  * Copyright (c) Rene Haas | KingSora.
  * https://github.com/KingSora
@@ -259,6 +259,7 @@ html[data-overlayscrollbars] > body {
   flex: auto !important;
   height: auto;
   width: 100%;
+  min-width: 0;
   padding: 0;
   margin: 0;
   border: none;
