@@ -5,10 +5,14 @@ import $ from 'jquery'
 import './extend';
 
 
-// ajax请求结束，打印一下结果方便调试
-$(document).ajaxComplete(function (event, xhr, options) {
+$(document).ajaxSend(function(event, xhr, options) {
+  console.log('bootstrap-admin请求 URL：', options.url);
+});
 
+// ajax请求结束，打印一下结果方便看数据调试
+$(document).ajaxComplete(function (event, xhr, options) {
     try {
+        console.log('bootstrap-admin响应数据:');
         console.log(JSON.parse(xhr.responseText));
     } catch (e) {
         //
