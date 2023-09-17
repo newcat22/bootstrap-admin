@@ -1,0 +1,26 @@
+name: ✋ 问题反馈
+description: 对bootstrap-admin新的功能请求
+title: ""
+body:
+  - type: input
+    attributes:
+      label: 版本号
+      placeholder: 请提供您所使用的 bootstrap-admin 版本号(如果有使用请填写所用版本)
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 功能描述
+      placeholder: 请提供详细的功能描述,这有助于理解
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: 演示地址
+      placeholder: 如果有类似功能的参考地址请提供
+  - type: checkboxes
+    attributes:
+      label: 友好承诺
+      options:
+        - label: 我承诺将本着相互尊重、理解和友善的态度进行交流，共同维护良好的开源氛围。
+          required: true
