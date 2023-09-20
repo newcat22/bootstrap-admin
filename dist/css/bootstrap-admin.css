@@ -10,15 +10,6 @@
   --bsa-footer-height: 38px;
 }
 
-table {
-  white-space: nowrap;
-}
-
-body {
-  min-width: 280px;
-  min-height: 100vh;
-}
-
 [data-bs-theme=indigo] {
   --bs-body-color: #6610f2;
   --bs-body-color-rgb: 102, 16, 242;
@@ -517,6 +508,10 @@ body {
 
 ::-webkit-scrollbar-corner {
   background-color: var(--bs-light-bg-subtle);
+}
+
+table {
+  white-space: nowrap;
 }
 
 [data-bs-theme=blue] .btn-close {
