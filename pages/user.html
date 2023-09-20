@@ -18,12 +18,13 @@
   <link rel="stylesheet" href="../dist/css/bootstrap-admin.min.css">
   <title>bootstrap-admin开源免费响应式后台管理系统模板</title>
 </head>
+
 <body class="bg-body-tertiary py-3">
 
 <div class="container-fluid">
   <div class="card border-0 shadow-sm">
-    <div class="card-header bg-body py-3">
-      <form class="row row-cols-sm-auto g-3 align-items-center">
+    <div class="card-header bg-body search-area">
+      <form class="row row-cols-sm-auto g-3 py-2 align-items-center">
         <div class="col-12">
           <div class="row">
             <label for="username" class="col-sm-auto col-form-label">用户名</label>
@@ -226,6 +227,24 @@
       icons: {
         fullscreen: 'bi-arrows-fullscreen',
       },
+      // 给右上角的按钮区域增加一个自定义按钮
+      buttons: function () {
+        return {
+
+          //这里只做一个示例
+          collapseSearch: {
+            text: 'Highlight Users',
+            icon: 'bi bi-search',
+            event: function () {
+              $(".search-area").slideToggle();
+            },
+            attributes: {
+              title: '折叠搜索区域'
+            }
+          }
+        }
+      },
+
       //头部的那个复选框选中事件
       onCheckAll: function (row) {
         batchBtnStatusHandle()
