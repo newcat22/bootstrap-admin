@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Image Grid with Crop Effect</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .image-box {
+      background-color: rgba(245, 245, 245, 0.7); /* 白底、浅色的颜色，70% 透明度 */
+      height: calc(96px + 20px);
+      margin: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-radius: 5px; /* 容器圆角 */
+    }
+
+    .filename {
+      height: 20px;
+      background-color: transparent;
+      position: absolute;
+      top: 10%; /* 调整图片名的位置 */
+      left: 0;
+      right: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+    }
+
+    .cropped-image-container {
+      width: 94%;
+      height: 58%;
+      overflow: hidden;
+      position: relative;
+      margin: auto;
+      margin-top: 18%; /* 调整图片容器的位置 */
+      border-radius: 5px; /* 图片容器圆角 */
+    }
+
+    .cropped-image {
+      display: block;
+      max-width: 94%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px; /* 图片圆角 */
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="row">
+    <!-- First Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal1">
+        <div class="filename">Image1.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal2">
+        <div class="filename">Image2.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal4">
+        <div class="filename">Image3.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal5">
+        <div class="filename">Image3.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Third Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal6">
+        <div class="filename">Image3.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Third Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal3">
+        <div class="filename">Image3.jpg</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<!-- 引入Bootstrap JS, Popper.js 和 jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- ...其他内容保持不变... -->
+<!-- ...其他内容保持不变... -->
+</body>
+</html>

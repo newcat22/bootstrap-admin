@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Image Grid with Crop Effect</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .image-box {
+      background-color: rgba(245, 245, 245, 0.7); /* 白底、浅色的颜色，70% 透明度 */
+      height: calc(96px + 20px);
+      margin: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-radius: 5px; /* 容器圆角 */
+    }
+
+    .filename {
+      height: 20px;
+      background-color: transparent;
+      position: absolute;
+      top: 10%; /* 调整图片名的位置 */
+      left: 0;
+      right: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+    }
+
+    .cropped-image-container {
+      width: 94%;
+      height: 58%;
+      overflow: hidden;
+      position: relative;
+      margin: auto;
+      margin-top: 18%; /* 调整图片容器的位置 */
+      border-radius: 5px; /* 图片容器圆角 */
+    }
+
+    .cropped-image {
+      display: block;
+      max-width: 94%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px; /* 图片圆角 */
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+    /* 添加下面的样式 */
+    .dropdown {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 5;
+    }
+
+    .dropdown-menu {
+      min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="container mt-5">
+    <div class="row" id="imageGrid">
+      <!-- 通过jQuery动态渲染的图片容器将被添加到这里 -->
+    </div>
+  </div>
+
+</div>
+
+<button id="showGallery">图库</button>
+<div id="gallery"></div>
+
+
+
+
+<!-- 引入Bootstrap JS, Popper.js 和 jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- ...其他内容保持不变... -->
+<!-- ...其他内容保持不变... -->
+<script>
+  $(document).ready(function () {
+    // 请求/search接口获取图片列表
+    //   $.ajax({
+    //     url: "/search",
+    //     type: "GET",
+    //     data: { key: "yourKey" }, // 替换 "yourKey" 为你的查询关键字
+    //     success: function(response) {
+    //       let htmlContent = '';
+    //       // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
+    //       for(let pic of response.pics) {
+    //         htmlContent += `
+    //                       <div class="col-2 p-0">
+    //                           <div class="image-box" data-toggle="modal" data-target="#imageModal${pic.filename}">
+    //                               <div class="filename">${pic.filename}</div>
+    //                               <div class="cropped-image-container">
+    //                                   <img src="${pic.url}" alt="Image" class="cropped-image">
+    //                               </div>
+    //                           </div>
+    //                           <div class="modal fade" id="imageModal${pic.filename}" tabindex="-1" role="dialog" aria-hidden="true">
+    //                               <div class="modal-dialog modal-lg">
+    //                                   <div class="modal-content">
+    //                                       <div class="modal-body">
+    //                                           <img src="${pic.url}" alt="Image">
+    //                                       </div>
+    //                                   </div>
+    //                               </div>
+    //                           </div>
+    //                       </div>
+    //                   `;
+    //       }
+    //       // 将生成的HTML内容添加到页面中
+    //       $('#imageGrid').html(htmlContent);
+    //     },
+    //     error: function(error) {
+    //       console.error("Error fetching images:", error);
+    //     }
+    //   });
+    // });
+    let htmlContent = '';
+    // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
+    let response = {
+      pics: [
+        {
+          filename: "sa1",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa2",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa3",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa4",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa5",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa6",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa7",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        },
+        {
+          filename: "sa8",
+          url: "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
+        }
+      ]
+    };
+    for (let pic of response.pics) {
+      htmlContent += `
+                        <div class="col-2 p-0">
+                            <div class="image-box" data-toggle="modal" data-target="#imageModal${pic.filename}">
+                                <!-- 省略号按钮和下拉菜单 -->
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-link dropdown-toggle p-1" data-toggle="dropdown">
+                                        ...
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item delete-image" href="#" data-filename="${pic.filename}">删除</a>
+                                    </div>
+                                </div>
+                                <div class="filename">${pic.filename}</div>
+                                <div class="cropped-image-container">
+                                    <img src="${pic.url}" alt="Image" class="cropped-image">
+                                </div>
+                            </div>
+                            <div class="modal fade" id="imageModal${pic.filename}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="${pic.url}" alt="Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    }
+    // 点击“删除”操作
+    $(document).on('click', '.delete-image', function(e) {
+      e.preventDefault();
+      const filename = $(this).data('filename');
+      // 如果删除成功，移除对应的容器
+      $(`[data-target="#imageModal${filename}"]`).parent().remove();
+      // $.ajax({
+      //   url: "/delete",
+      //   type: "POST",
+      //   data: { filename: filename },
+      //   success: function(response) {
+      //     // 如果删除成功，移除对应的容器
+      //     $(`[data-target="#imageModal${filename}"]`).parent().remove();
+      //   },
+      //   error: function(error) {
+      //     console.error("Error deleting image:", error);
+      //   }
+      // });
+    });
+    // 将生成的HTML内容添加到页面中
+    $('#imageGrid').html(htmlContent);
+  })
+
+  document.getElementById('showGallery').addEventListener('click', function () {
+    fetch('http://127.0.0.1:8000/database/')
+      .then(response => response.json())
+      .then(data => {
+        var gallery = document.getElementById('gallery');
+        gallery.innerHTML = '';
+        data.images.forEach(pic => {
+          var img = document.createElement('img');
+          img.src = pic.url;
+          img.alt = pic.name;
+          img.width = 100;
+          gallery.appendChild(img);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  });
+</script>
+</body>
+</html>

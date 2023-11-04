@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Image Grid with Crop Effect</title>
+  <!-- 引入Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .image-box {
+      background-color: #f2f2f2;
+      height: 150px; /* 调整容器的高度来适应图片名称和图片 */
+      width: 128px;
+      border: 2px solid rgba(173, 216, 230, 0.5);
+      margin-right: 2px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .filename {
+      height: 22px;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+    }
+
+    .cropped-image-container {
+      width: calc(100% - 2px);
+      height: calc(100% - 22px - 2px);
+      overflow: hidden;
+      position: relative;
+      padding: 1px;
+      top: 22px; /* 移动到图片名称的下方 */
+    }
+
+    .cropped-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- First Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal1">
+        <div class="filename">图片1</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal2">
+        <div class="filename">图片2</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third Container -->
+    <div class="col-2 p-0">
+      <div class="image-box" data-toggle="modal" data-target="#imageModal3">
+        <div class="filename">图片3</div>
+        <div class="cropped-image-container">
+          <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image" class="cropped-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Image Previews -->
+    <div class="modal fade" id="imageModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 引入Bootstrap JS, Popper.js 和 jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
