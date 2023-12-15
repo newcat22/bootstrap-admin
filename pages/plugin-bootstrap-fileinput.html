@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="zh">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -14,45 +15,60 @@
     <link rel="stylesheet" href="../dist/css/bootstrap-admin.min.css">
     <title>bootstrap-admin开源免费响应式后台管理系统模板</title>
 </head>
-<body class="bg-body-tertiary py-3">
-<div class="container-fluid">
-    <div class="card border-0 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">文件上传</h5>
-            <h6 class="card-subtitle mb-2 ">bootstrap-fileinput是基于bootstrap的插件效果不错</h6>
-            <hr>
-            <input id="input-id" name="file-data" type="file">
 
+
+<body class="bg-body-tertiary py-3">
+
+    <div class="container-fluid">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">文件上传</h5>
+                <h6 class="card-subtitle mb-2 "></h6>
+                <hr>
+                <input id="input-id" name="image" type="file">
+
+            </div>
         </div>
     </div>
-</div>
 
-<!--回到顶部开始-->
-<a href="javaScript:" class="bsa-back-to-top"><i class='bi bi-arrow-up-short'></i></a>
-<!--回到顶部结束-->
+    <!--回到顶部开始-->
+    <a href="javaScript:" class="bsa-back-to-top"><i class='bi bi-arrow-up-short'></i></a>
+    <!--回到顶部结束-->
 
-<script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../lib/jquery/dist/jquery.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/plugins/buffer.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/plugins/filetype.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/plugins/piexif.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/plugins/sortable.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/fileinput.min.js"></script>
-<script src="../lib/bootstrap-fileinput/js/locales/zh.js"></script>
-<script src="../dist/js/bootstrap-admin.min.js"></script>
-<script src="../dist/js/app.js"></script>
-<!--假数据模拟,生产环境中请直接删除该js-->
-<script src="../dist/js/bootstrap-admin.mock.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#input-id").fileinput({
-            language: 'zh',
-            uploadUrl: '/path/to/your-upload-api',
-            previewFileType: 'any'
+    <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/plugins/buffer.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/plugins/filetype.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/plugins/piexif.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/plugins/sortable.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="../lib/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="../dist/js/bootstrap-admin.min.js"></script>
+    <script src="../dist/js/app.js"></script>
+    <!--假数据模拟,生产环境中请直接删除该js-->
+    <!-- <script src="../dist/js/bootstrap-admin.mock.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $("#input-id").fileinput({
+                language: 'zh',
+                uploadUrl: 'http://127.0.0.1:8000/upload/',
+                previewFileType: 'any'
+            });
         });
-    });
-</script>
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            fetch('/upload/', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
 
 
 </body>
+
 </html>
