@@ -19,9 +19,9 @@
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <h5 class="card-title">文件上传</h5>
-            <h6 class="card-subtitle mb-2 ">bootstrap-fileinput是基于bootstrap的插件效果不错</h6>
+            <h6 class="card-subtitle mb-2 "></h6>
             <hr>
-            <input id="input-id" name="file-data" type="file">
+            <input id="input-id" name="image" type="file">
 
         </div>
     </div>
@@ -41,13 +41,13 @@
 <script src="../lib/bootstrap-fileinput/js/locales/zh.js"></script>
 <script src="../dist/js/bootstrap-admin.min.js"></script>
 <script src="../dist/js/app.js"></script>
-<!--假数据模拟,生产环境中请直接删除该js-->
-<script src="../dist/js/bootstrap-admin.mock.js"></script>
+<!--&lt;!&ndash;假数据模拟,生产环境中请直接删除该js&ndash;&gt;-->
+<!--<script src="../dist/js/bootstrap-admin.mock.js"></script>-->
 <script>
     $(document).ready(function () {
         $("#input-id").fileinput({
             language: 'zh',
-            uploadUrl: '/path/to/your-upload-api',
+            uploadUrl: 'http://127.0.0.1:8000/upload/',
             previewFileType: 'any'
         });
     });

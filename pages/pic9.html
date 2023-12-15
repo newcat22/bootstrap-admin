@@ -50,7 +50,7 @@
     .cropped-image {
       display: block;
       max-width: 100%;
-      height: 800;
+      height: auto;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -61,7 +61,7 @@
 
     .modal-body img {
       max-width: 100%;
-      height: 800;
+      height: auto;
     }
 
     /* 添加下面的样式 */
@@ -88,6 +88,13 @@
 
 </div>
 
+
+<h2>图片搜索</h2>
+<input type="text" id="searchQuery" placeholder="输入搜索词">
+<button id="searchButton">查询</button>
+<div id="searchResults"></div>
+
+
 <!-- 引入Bootstrap JS, Popper.js 和 jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -96,56 +103,6 @@
 <!-- ...其他内容保持不变... -->
 <script>
   $(document).ready(function () {
-    fetch('http://127.0.0.1:8000/database/')
-      .then(response => response.json())
-      .then(data => {
-        //var gallery = document.getElementById('gallery');
-        //gallery.innerHTML = '';
-
-        let htmlContent = '';
-        // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
-
-        data.images.forEach(pic => {
-          var img = document.createElement('img');
-          img.src = pic.url;
-          img.alt = pic.name;
-          img.width = 100;
-
-          htmlContent += `
-                        <div class="col-2 p-0">
-                            <div class="image-box" data-toggle="modal" data-target="#imageModal${img.alt}">
-                                <!-- 省略号按钮和下拉菜单 -->
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-link dropdown-toggle p-1" data-toggle="dropdown">
-                                        ...
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item delete-image" href="#" data-filename="${img.alt}">删除</a>
-                                    </div>
-                                </div>
-                                <div class="cropped-image-container">
-                                    <img src="${img.src}" alt="Image" class="cropped-image">
-                                </div>
-                            </div>
-                            <div class="modal fade" id="imageModal${img.alt}" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <img src="${img.src}" alt="Image">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-          //gallery.appendChild(img);
-        });
-
-        // 将生成的HTML内容添加到页面中
-        $('#imageGrid').html(htmlContent);
-      })
-      .catch(error => console.error('Error:', error));
 
     // 点击“删除”操作
     $(document).on('click', '.delete-image', function (e) {
@@ -153,28 +110,6 @@
       const filename = $(this).data('filename');
       // 如果删除成功，移除对应的容器
       $(`[data-target="#imageModal${filename}"]`).parent().remove();
-
-      // 创建一个FormData对象，用于发送POST请求
-      var formData = new FormData();
-      formData.append('image_name', filename);
-
-      // 发送POST请求到服务器，请求删除图片
-      fetch('http://127.0.0.1:8000/delete/', {
-        method: 'POST',
-        body: formData,
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (response.ok) {
-            // 如果服务器返回了成功的响应，那么删除图片容器
-            imageContainer.remove();
-          } else {
-            // 如果服务器返回了错误的响应，那么显示错误消息
-            alert(data.message);
-          }
-        })
-        .catch(error => console.error('Error:', error));
-
       // $.ajax({
       //   url: "/delete",
       //   type: "POST",
@@ -192,13 +127,13 @@
     $('#imageGrid').html(htmlContent);
   })
 
-  document.getElementById('showGallery').addEventListener('click', function () {
-    fetch('http://127.0.0.1:8000/database/')
+  document.getElementById('searchButton').addEventListener('click', function () {
+    var query = document.getElementById('searchQuery').value;
+    fetch('http://127.0.0.1:8000/search/?query=' + encodeURIComponent(query))
       .then(response => response.json())
       .then(data => {
-        //var gallery = document.getElementById('gallery');
-        //gallery.innerHTML = '';
-
+        //var searchResults = document.getElementById('searchResults');
+        //searchResults.innerHTML = '';
         let htmlContent = '';
         // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
 
@@ -207,7 +142,7 @@
           img.src = pic.url;
           img.alt = pic.name;
           img.width = 100;
-
+          //searchResults.appendChild(img);
           htmlContent += `
                         <div class="col-2 p-0">
                             <div class="image-box" data-toggle="modal" data-target="#imageModal${img.alt}">
@@ -220,7 +155,6 @@
                                         <a class="dropdown-item delete-image" href="#" data-filename="${img.alt}">删除</a>
                                     </div>
                                 </div>
-                                <div class="filename">${img.alt}</div>
                                 <div class="cropped-image-container">
                                     <img src="${img.src}" alt="Image" class="cropped-image">
                                 </div>
@@ -237,9 +171,7 @@
                         </div>
                     `;
 
-          //gallery.appendChild(img);
         });
-
         // 将生成的HTML内容添加到页面中
         $('#imageGrid').html(htmlContent);
       })
