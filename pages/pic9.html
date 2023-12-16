@@ -89,11 +89,15 @@
 </div>
 
 
-<h2>图片搜索</h2>
-<input type="text" id="searchQuery" placeholder="输入搜索词">
-<button id="searchButton">查询</button>
 <div id="searchResults"></div>
+<div class="container mt-5">
+  <div class="container mt-5">
+    <div class="row" id="imageGrid1">
+      <!-- 通过jQuery动态渲染的图片容器将被添加到这里 -->
+    </div>
+  </div>
 
+</div>
 
 <!-- 引入Bootstrap JS, Popper.js 和 jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -103,47 +107,24 @@
 <!-- ...其他内容保持不变... -->
 <script>
   $(document).ready(function () {
+    //现在按钮已经加载，可以添加事件监听器
+    parent.document.getElementById('searchButton').addEventListener('click', function () {
+      var query = parent.document.getElementById('searchQuery').value;
+      console.log(query)
+      fetch('http://127.0.0.1:8000/search/?query=' + encodeURIComponent(query))
+        .then(response => response.json())
+        .then(data => {
+          //var searchResults = document.getElementById('searchResults');
+          //searchResults.innerHTML = '';
+          let htmlContent = '';
+          // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
+          data.images.forEach(pic => {
+            var img = document.createElement('img');
+            img.src = pic.url;
+            img.alt = pic.name.split('.')[0];
+            img.width = 100;
 
-    // 点击“删除”操作
-    $(document).on('click', '.delete-image', function (e) {
-      e.preventDefault();
-      const filename = $(this).data('filename');
-      // 如果删除成功，移除对应的容器
-      $(`[data-target="#imageModal${filename}"]`).parent().remove();
-      // $.ajax({
-      //   url: "/delete",
-      //   type: "POST",
-      //   data: { filename: filename },
-      //   success: function(response) {
-      //     // 如果删除成功，移除对应的容器
-      //     $(`[data-target="#imageModal${filename}"]`).parent().remove();
-      //   },
-      //   error: function(error) {
-      //     console.error("Error deleting image:", error);
-      //   }
-      // });
-    });
-    // 将生成的HTML内容添加到页面中
-    $('#imageGrid').html(htmlContent);
-  })
-
-  document.getElementById('searchButton').addEventListener('click', function () {
-    var query = document.getElementById('searchQuery').value;
-    fetch('http://127.0.0.1:8000/search/?query=' + encodeURIComponent(query))
-      .then(response => response.json())
-      .then(data => {
-        //var searchResults = document.getElementById('searchResults');
-        //searchResults.innerHTML = '';
-        let htmlContent = '';
-        // 假设响应数据的格式为 { pics: [{ filename: "...", url: "..." }, ...] }
-
-        data.images.forEach(pic => {
-          var img = document.createElement('img');
-          img.src = pic.url;
-          img.alt = pic.name;
-          img.width = 100;
-          //searchResults.appendChild(img);
-          htmlContent += `
+            htmlContent += `
                         <div class="col-2 p-0">
                             <div class="image-box" data-toggle="modal" data-target="#imageModal${img.alt}">
                                 <!-- 省略号按钮和下拉菜单 -->
@@ -152,7 +133,7 @@
                                         ...
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item delete-image" href="#" data-filename="${img.alt}">删除</a>
+                                        <a class="dropdown-item delete-image" href="#" data-filename="${pic.name}">删除</a>
                                     </div>
                                 </div>
                                 <div class="cropped-image-container">
@@ -171,12 +152,16 @@
                         </div>
                     `;
 
-        });
-        // 将生成的HTML内容添加到页面中
-        $('#imageGrid').html(htmlContent);
-      })
-      .catch(error => console.error('Error:', error));
+            //gallery.appendChild(img);
+          });
+          // 将生成的HTML内容添加到页面中
+          $('#imageGrid1').html(htmlContent);
+        })
+        .catch(error => console.error('Error:', error));
+    });
   });
+
+
 </script>
 </body>
 

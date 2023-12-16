@@ -12,7 +12,38 @@
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="lib/overlayscrollbars/styles/overlayscrollbars.min.css">
   <link rel="stylesheet" href="dist/css/bootstrap-admin.min.css">
-  <title>bootstrap-admin开源免费响应式后台管理系统模板</title>
+  <title>个人云图</title>
+  <style>
+    .custom-input {
+      border-radius: 20px; /* 圆角 */
+      background-color: rgba(255, 255, 255, 0.7); /* 透明度和背景色 */
+      border: 1px solid rgba(0, 123, 255, 0.5); /* 边框颜色和透明度 */
+      padding: 0.375rem 0.75rem; /* 内边距 */
+    }
+
+    .custom-input:focus {
+      background-color: rgba(255, 255, 255, 0.9); /* 获取焦点时的背景色 */
+      outline: none; /* 去除轮廓 */
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* 焦点阴影 */
+    }
+
+
+    .custom-btn {
+      border-radius: 20px; /* 圆角 */
+      background-color: rgba(135, 206, 235, 0.6); /* 天空蓝色，透明度为 0.6 */
+      color: white; /* 按钮内文字颜色 */
+      border: none; /* 无边框 */
+      padding: 0.375rem 0.75rem; /* 内边距 */
+      writing-mode: horizontal-tb; /* 强制水平文本排列 */
+      display: inline-block; /* 确保水平排列 */
+      text-align: center; /* 文字居中 */
+      vertical-align: middle; /* 垂直居中 */
+    }
+
+    .custom-btn:hover {
+      background-color: rgba(135, 206, 235, 0.7); /* 鼠标悬浮时增加透明度 */
+    }
+  </style>
 </head>
 
 <body data-theme="light">
@@ -27,7 +58,9 @@
   </li>
   <!--  搜索组件(不需要可删除)  -->
   <li>
+
     <div class="bsa-header-item bsa-cursor-default">
+
 <!--      &lt;!&ndash;    搜索表单包裹区域        &ndash;&gt;-->
 <!--      <div class="bsa-search-form-wrapper"-->
 <!--           data-bsa-toggle="navbar-search"-->
@@ -45,6 +78,8 @@
 <!--      <i class="bi bi-search bsa-search-form-toggler bsa-cursor-pointer"></i>-->
 <!--      <input type="text" id="searchQuery" placeholder="输入搜索词">-->
 <!--      <button id="searchButton">查询</button>-->
+      <input type="text" id="searchQuery" class="form-control custom-input"  placeholder="输入搜索词">
+      <button id="searchButton" class="btn">查</button>
     </div>
   </li>
   <!--  占位(可以让后面的li居右)  -->
@@ -255,7 +290,7 @@
     <!--  侧边栏头部(用于展示品牌logo)  -->
     <div class="card-header bg-body d-flex align-items-center flex-shrink-0">
       <img src="dist/img/favicon-32x32.png" class="bsa-logo-icon" alt="logo-icon">
-      <div class="bsa-logo-text ms-2 bsa-ellipsis-2">个人云</div>
+      <div class="bsa-logo-text ms-2 bsa-ellipsis-2">个人云图</div>
     </div>
     <!--  侧边栏身体部分(用于主要的侧边栏菜单)  -->
     <div class="card-body p-0" data-overlayscrollbars-initialize>
